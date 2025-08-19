@@ -1,58 +1,73 @@
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
-# Virtual environments
-.venv/
-venv/
-env/
-ENV/
-PasswordManager/
+# C extensions
+*.so
 
 # Distribution / packaging
+.Python
 build/
 develop-eggs/
 dist/
+downloads/
 eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
+
+# Virtual environments
+venv/
+.env
+.env*/ 
+.venv/
+pip-wheel-metadata/
+
+# Environment variables / secrets
+.envrc
+*.env
+*.secret
+SPM_SECRET
+
+# Mamba/Conda environments
+*.conda
+*.yml
+*.yaml
+
+# Flask specific
+instance/
+*.db
+*.sqlite3
 
 # Logs
-logs/
 *.log
+logs/
+intel/logs/
 
-# OS files
-.DS_Store
-.AppleDouble
-.LSOverride
-Thumbs.db
-ehthumbs.db
-Desktop.ini
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
 
-# IDE / editor files
+# IDEs and editors
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# Env / secrets
-.env
-.envrc
-*.secret
-SPM_SECRET*
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
 
-# Data (your encrypted vaults)
-data/*.vault.json
-
-# Tests / coverage
-htmlcov/
-.tox/
-.coverage
-coverage.xml
-*.cover
-.pytest_cache/
-
-# Jupyter notebooks checkpoints
-.ipynb_checkpoints_
+# Other
+__MACOSX/

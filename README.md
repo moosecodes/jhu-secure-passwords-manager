@@ -40,6 +40,7 @@ The app supports both a **CLI interface** and a **Web interface (Flask + Bootstr
 │   ├── webapp.py        # Flask web interface
 │   └── static/          # Static assets (favicon, CSS)
 ├── README.md
+├── requirements.in
 └── requirements.txt
 ```
 
@@ -53,24 +54,32 @@ git clone https://github.com/<your-username>/jhu-secure-passwords-manager.git
 cd jhu-secure-passwords-manager
 python -m venv .venv
 source .venv/bin/activate
+```
+
+### 2. Install dependencies
+
+Using pip with compiled requirements:
+```bash
 pip install -r requirements.txt
 ```
 
-### 2. Install dependencies manually (if no `requirements.txt`)
+Or regenerate from the top-level list:
 ```bash
-pip install flask cryptography argon2-cffi
+pip install pip-tools
+pip-compile --generate-hashes -o requirements.txt requirements.in
+pip install -r requirements.txt
 ```
 
-### 3. Seed a demo vault
+---
+
+## ▶️ Usage
+
+### Seed a demo vault
 ```bash
 python -m password_manager.seed_vault
 ```
 This creates `data/test.vault.json` with a few sample entries.  
 Master password for the demo vault: **`TestOnly!2025`**
-
----
-
-## ▶️ Usage
 
 ### CLI
 ```bash
