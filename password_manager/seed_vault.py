@@ -1,7 +1,7 @@
 from pathlib import Path
-from .models import Vault, Entry
-from .crypto import encrypt_vault
-from .storage import save_vault
+from models import Vault, Entry
+from password_manager.crypto import encrypt_vault
+from storage import save_vault
 import secrets
 import string
 

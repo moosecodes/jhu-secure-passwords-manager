@@ -1,7 +1,7 @@
 '''Storage.py'''
 import json
 from pathlib import Path
-from .crypto import encrypt_vault, decrypt_vault
+from password_manager.crypto import encrypt_vault, decrypt_vault
 
 def save_vault(path: Path, vault_obj: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
