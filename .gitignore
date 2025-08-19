@@ -30,15 +30,14 @@ MANIFEST
 
 # Virtual environments
 venv/
-.env
-.env*/
-.envrc/
 .venv/
 pip-wheel-metadata/
 
 # Environment variables / secrets
-.envrc
 *.env
+.envrc
+.envrc/
+.env*/
 *.secret
 SPM_SECRET
 
@@ -77,3 +76,8 @@ data/
 
 # Other
 __MACOSX/
+.env
+__pycache__/
+*.pyc
+logs/
+data/*.vault.json
