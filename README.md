@@ -1,132 +1,130 @@
-# Secure Password Manager
+# 🔐 Secure Password Manager
 
-A modern, secure password manager with both CLI and web interfaces, built with Python using state-of-the-art cryptography (Argon2id + AES-GCM).
-
-## 🔒 Security Features
-
-- **Modern Cryptography**: Argon2id key derivation + AES-256-GCM encryption
-- **Secure Password Generation**: Cryptographically secure random passwords
-- **Password History**: Track previous passwords when rotating
-- **Security Audit Logging**: Complete audit trail of vault operations
-- **Zero-Knowledge Architecture**: Master password never stored
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Python 3.8+
-- pip or mamba package manager
-
-### Installation
-
-1. **Clone and setup:**
-   ```bash
-   git clone <your-repo-url>
-   cd password_manager
-   pip install -r requirements.txt  # or use mamba
-   ```
-
-2. **Environment Setup:**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your preferred settings
-   ```
-
-3. **Create Test Vault:**
-   ```bash
-   python -m password_manager.seed_vault
-   ```
-
-### Usage
-
-**CLI Interface:**
-```bash
-python -m password_manager.cli
-# Default master password: TestOnly!2025
-```
-
-**Web Interface:**
-```bash
-python -m flask --app password_manager.webapp run
-# Navigate to http://localhost:5000
-# Master password: TestOnly!2025
-```
-
-## 📁 Project Structure
-
-```
-password_manager/
-├── cli.py                     # CLI interface with menu system
-├── webapp.py                  # Flask web interface
-├── vault_service.py           # Main service layer
-├── crypto.py                  # Modern cryptography (Argon2id/AES-GCM)
-├── models.py                  # Data models and structures
-├── passwords.py               # Secure password generation
-├── storage.py                 # Vault file I/O operations
-├── seed_vault.py              # Test data creation
-└── static/css/theme.css       # Web UI styling
-```
-
-## 🔧 Configuration
-
-Environment variables (set in `.env`):
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `SPM_SECRET` | Flask secret key | `dev-secret-change-me` |
-| `VAULT_PATH` | Path to vault file | `data/test.vault.json` |
-| `LOG_LEVEL` | Logging verbosity | `INFO` |
-| `LOG_DIR` | Log file directory | `logs` |
-
-## 🛡️ Security Notes
-
-- **Test Environment Only**: Default passwords are for development/testing
-- **Production Deployment**: Change all default secrets and passwords
-- **Vault Files**: Encrypted with industry-standard cryptography
-- **Master Password**: Required for all vault operations
-
-## 📋 CLI Menu Options
-
-1. **List entries** - View all password entries
-2. **Add entry** - Create new password entry
-3. **Retrieve password** - Display specific password
-4. **Update entry** - Modify existing entry
-5. **Rotate password** - Generate new password for entry
-6. **Delete entry** - Remove password entry
-7. **Search** - Find entries by site/username/tags
-
-## 🌐 Web Interface Features
-
-- **Responsive Design** - Works on desktop and mobile
-- **Search & Filter** - Find entries quickly
-- **Bulk Operations** - Manage multiple entries
-- **Password Generation** - Built-in secure password generator
-- **Dark Theme** - Easy on the eyes
-
-## 🔍 Vault Inspection
-
-Inspect vault contents without full CLI:
-```bash
-python -m password_manager.inspect_vault --file data/test.vault.json
-```
-
-## 🏗️ Development
-
-**Project Goals:**
-- Educational exercise for Johns Hopkins AI certification
-- Demonstrate secure coding practices
-- Modern Python development patterns
-- Clean architecture and separation of concerns
-
-**Security First:**
-- No hardcoded production secrets
-- Proper cryptographic implementations
-- Secure defaults and clear test/prod separation
-
-## 📄 License
-
-Educational/Academic Use - Johns Hopkins University Generative AI Certification Project
+A Python-based password manager that demonstrates secure password **generation, storage, retrieval, and management** using modern cryptography.
+This project was developed as an advanced case study to practice **security best practices, encryption, and authentication** in Python.
 
 ---
 
-⚠️ **Important**: This is a learning project. For production use, consider established password managers like Bitwarden or 1Password.
+## ✨ Features
+
+* **Authentication System**
+
+  * Master password required to unlock vault.
+  * Secure credential verification using **Argon2id KDF**.
+
+* **Strong Password Generation**
+
+  * Flexible generator supporting uppercase, lowercase, digits, and symbols.
+  * Excludes ambiguous characters for usability.
+  * Users can input their own passwords or auto-generate secure ones.
+
+* **Vault Management (CRUD)**
+
+  * Add, retrieve, update, rotate, and delete entries.
+  * Password history tracked in entries.
+  * CLI and optional **Flask-based web interface**.
+
+* **Encryption & Storage**
+
+  * Vault encrypted with **AES-GCM (256-bit)**.
+  * Each vault includes random salt + nonce.
+  * Atomic file save with backup protection.
+
+* **Logging & Security**
+
+  * Security actions logged via rotating log file (`logs/security.log`).
+  * Tracks vault access, adds, updates, and deletes.
+
+---
+
+## 🏗 Project Structure
+
+```
+password_manager/
+├── cli.py                 # Command-line interface
+├── webapp.py              # Flask web interface (optional)
+├── vault_service.py       # High-level vault CRUD service (production)
+├── storage.py             # Vault persistence layer
+├── crypto.py              # AES-GCM + Argon2id encryption
+├── kdf.py                 # Argon2id key derivation
+├── models.py              # Dataclasses: Vault, Entry, Policy
+├── passwords.py           # Secure password generator
+├── seed_vault.py          # Build sample vault for testing/demo
+├── inspect_vault.py       # Utility: inspect vault contents
+├── tests/                 # Unit test suite (pytest)
+└── static/                # Assets for webapp
+```
+
+---
+
+## 🚀 Getting Started
+
+### 1. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Seed a demo vault
+
+```bash
+python -m password_manager.seed_vault
+```
+
+This creates `data/test.vault.json` with sample entries.
+
+### 3. Run the CLI
+
+```bash
+python -m password_manager.cli
+```
+
+### 4. Run the Web Interface (optional)
+
+```bash
+flask --app password_manager.webapp run
+```
+
+Open [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser.
+
+---
+
+## 🧪 Running Tests
+
+Run the full suite with:
+
+```bash
+pytest password_manager/tests -v
+```
+
+Covers encryption, storage, password generation, models, and manager logic.
+
+---
+
+## 📚 Implementation Notes
+
+* The project contains **two parallel stacks** of crypto/storage logic:
+
+  1. **Prototype:** `CryptoManager + FileStorageManager + PasswordManagerCore` (PBKDF2 + Fernet).
+  2. **Production:** `VaultService + crypto.py + storage.py` (Argon2id + AES-GCM).
+
+* The **VaultService stack** is the recommended final design, leveraging stronger KDF + cipher choices and full logging.
+
+* The **PasswordManagerCore stack** is preserved as a **learning prototype** to demonstrate an alternative implementation.
+
+---
+
+## 🔒 Security Highlights
+
+* Argon2id key derivation (memory-hard, resistant to GPU/ASIC attacks).
+* AES-GCM authenticated encryption.
+* Salt and nonce are regenerated per vault.
+* Rotating logs for auditability.
+* Secure random password generation with character diversity.
+
+---
+
+## 📄 License
+
+MIT License — free to use, modify, and learn from.
+
