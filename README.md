@@ -1,58 +1,110 @@
-Self-paced Advanced Case Study: Build a Secure Password Manager
-Introduction
-Welcome to this advanced case study, where you will build a Secure Password Manager from scratch using Python. This project will challenge your ability to implement secure password storage, retrieval, and management while applying best practices in encryption and authentication.
+# 🔐 Secure Password Manager
 
-Why is This Important?
-Managing passwords securely is critical for businesses, financial institutions, and individuals. Weak password storage methods can lead to security breaches, identity theft, and unauthorized access. Your task is to develop a password management system that ensures security and usability.
+A simple but modern **Secure Password Manager** built in Python for learning and experimentation.  
+Developed as part of the **Johns Hopkins Generative AI Certificate program**.
 
-What You Need to Do
-You will design and implement a command-line-based Password Manager that includes the following features:
+The app supports both a **CLI interface** and a **Web interface (Flask + Bootstrap)**.
 
-Authentication System
-Implement a user login system that requires authentication before accessing stored passwords.
-Ensure secure credential verification to prevent unauthorized access.
-Password Generation
-Create a strong password generator that follows best security practices.
-Allow users to either input their own passwords or generate secure ones automatically.
-Password Retrieval & Management
-Implement a retrieval system that allows users to securely access their stored passwords.
-Allow users to update existing passwords or generate new ones if needed.
-Provide a feature to delete passwords securely when no longer needed.
-Logging & Security Measures
-Maintain logs of user actions to track access and modifications.
+---
 
+## ✨ Features
+- AES-GCM encryption with keys derived using **Argon2id**
+- Encrypted vault stored as JSON
+- Auto-generation of strong, policy-compliant passwords
+- Full CRUD:
+  - Add / Retrieve / Update / Delete entries
+  - Rotate password with history tracking
+- Multiple interfaces:
+  - **CLI menu**
+  - **Web GUI** (Bootstrap-styled, responsive)
+- Security logging (non-sensitive metadata only)
+- Configurable password policy
+- Pre-seeded test vault with example entries
 
-Approach to Building the Password Manager
-Use the following structured approach to implement your Password Generator and Manager:
+---
 
-Problem Breakdown - Steps Involved
-Default Setup
+## 📂 Project Structure
+```
+.
+├── data/                # Encrypted vaults (ignored in git)
+├── logs/                # Security logs
+├── password_manager/    # Main package
+│   ├── cli.py           # CLI interface
+│   ├── crypto.py        # AES-GCM encryption / decryption
+│   ├── kdf.py           # Argon2id key derivation
+│   ├── models.py        # Vault + Entry dataclasses
+│   ├── passwords.py     # Password generator
+│   ├── seed_vault.py    # Seed a demo vault
+│   ├── storage.py       # Read/write vault files
+│   ├── vault_service.py # CRUD and business logic
+│   ├── webapp.py        # Flask web interface
+│   └── static/          # Static assets (favicon, CSS)
+├── README.md
+└── requirements.txt
+```
 
-Create default password storage files for testing.
-Set up an initial structure for authentication and encryption.
-Password Generation
+---
 
-Build functions to generate random passwords based on length and complexity requirements.
-Ensure passwords include uppercase, lowercase, numbers, and special characters for enhanced security.
-Password Manager Functionalities
+## 🛠️ Setup
 
-Helper Methods: Implement functions to read/write passwords and logs securely.
-Add Password: Enable users to add a new password manually or auto-generate a secure 12-digit password for a domain.
-Retrieve Password: Allow users to view stored passwords securely.
-Update Password: Provide the option to update or auto-generate a new password for an existing domain.
-Delete Password: Implement a feature to remove a password when no longer needed.
-Main Function
+### 1. Clone & create environment
+```bash
+git clone https://github.com/<your-username>/jhu-secure-passwords-manager.git
+cd jhu-secure-passwords-manager
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
 
-Centralize all functionalities into a menu-driven interface for easy navigation.
-Ensure secure user interactions with proper encryption and validation checks.
+### 2. Install dependencies manually (if no `requirements.txt`)
+```bash
+pip install flask cryptography argon2-cffi
+```
 
+### 3. Seed a demo vault
+```bash
+python -m password_manager.seed_vault
+```
+This creates `data/test.vault.json` with a few sample entries.  
+Master password for the demo vault: **`TestOnly!2025`**
 
-Flow Chart.PNG
+---
 
-💡 Note: Don't get overwhelmed! Take it one step at a time—start with the basics, then gradually add features. Breaking the problem down into smaller tasks will make it easier to tackle. Remember, every great project begins with a single line of code. You got this!
+## ▶️ Usage
 
+### CLI
+```bash
+python -m password_manager.cli --file data/test.vault.json
+# Master password: TestOnly!2025
+```
 
+### Web Interface
+Set a Flask secret (required for sessions):
+```bash
+export SPM_SECRET=$(python -c "import secrets; print(secrets.token_hex(32))")
+export FLASK_APP=password_manager.webapp
+export FLASK_ENV=development
+flask run --reload
+```
+Then open: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
+---
 
+## 🛡️ Security Notes
+- This project is for **educational purposes** only — not production-ready.
+- Master password is held in memory only during the session.
+- Vault file and logs are excluded from git via `.gitignore`.
 
-Happy Learning !!
+---
+
+## 📚 Roadmap
+- [ ] Idle timeout & re-auth
+- [ ] Clipboard copy with auto-clear (Web)
+- [ ] Stronger search & tag filters
+- [ ] Desktop GUI with Tkinter / ttkbootstrap
+- [ ] Packaging as pip installable tool
+
+---
+
+## 📄 License
+MIT License

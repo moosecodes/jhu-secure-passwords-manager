@@ -1,11 +1,58 @@
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
-*.db
-*.sqlite
-*.log
-*.bak
-*.tmp
+*$py.class
 
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+PasswordManager/
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+eggs/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Logs
+logs/
+*.log
+
+# OS files
 .DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE / editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Env / secrets
+.env
+.envrc
+*.secret
+SPM_SECRET*
+
+# Data (your encrypted vaults)
+data/*.vault.json
+
+# Tests / coverage
+htmlcov/
+.tox/
+.coverage
+coverage.xml
+*.cover
+.pytest_cache/
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints_
