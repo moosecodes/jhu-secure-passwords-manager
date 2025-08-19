@@ -1,10 +1,15 @@
 '''FileStorageManager Tests'''
+import sys
 import os
 import json
 import tempfile
 import pytest
-from file_storage_manager import FileStorageManager
-from crypto_manager import CryptoManager
+
+from password_manager.file_storage_manager import FileStorageManager
+from password_manager.crypto_manager import CryptoManager
+
+# Add the parent directory to the Python path so we can import our modules
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 class TestFileStorageManager:
     """Test suite for FileStorageManager."""

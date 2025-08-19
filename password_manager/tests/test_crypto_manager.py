@@ -1,4 +1,10 @@
+import sys
+import os
 import pytest
+
+# Add the parent directory to the Python path so we can import our modules
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from crypto_manager import CryptoManager
 
 def test_basic_encryption_decryption():
