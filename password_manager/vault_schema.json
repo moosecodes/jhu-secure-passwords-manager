@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "vault_id": "uuid-v4",
+  "created_at": "2025-08-18T18:55:00Z",
+  "entries": [
+    {
+      "id": "uuid-v4",
+      "site": "github.com",
+      "username": "moose",
+      "password": "generated-or-manual",
+      "url": "https://github.com/login",
+      "notes": "2FA on",
+      "tags": ["dev","work"],
+      "updated_at": "2025-08-18T18:55:00Z",
+      "history": [
+        {"password": "oldpass#1", "changed_at": "2025-08-10T12:00:00Z"}
+      ]
+    }
+  ],
+  "settings": {
+    "password_policy": {
+      "length": 16,
+      "uppercase": true,
+      "lowercase": true,
+      "digits": true,
+      "symbols": true,
+      "exclude_ambiguous": true
+    }
+  }
+}
