@@ -34,25 +34,23 @@ BASE = """
 <html lang="en" data-bs-theme="light">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/minty/bootstrap.min.css" rel="stylesheet">
-<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}?v=3">
+<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/slate/bootstrap.min.css" rel="stylesheet">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
-<!-- Google Fonts: Inter + Figtree -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 <title>Secure Password Manager</title>
 </head>
 <body>
-<nav class="navbar navbar-dark" style="background:#0b1220">
+<nav class="navbar navbar-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ url_for('vault') }}">🔐 Password Manager</a>
     <div>
-      {% if session.get('vault_file') %}<span class="me-3 small text-secondary">{{ session.get('vault_file') }}</span>{% endif %}
-      <a class="btn btn-sm btn-light" href="{{ url_for('logout') }}">Logout</a>
+      {% if session.get('vault_file') %}<span class="me-3 small text-vault">{{ session.get('vault_file') }}</span>{% endif %}
+      <a class="btn btn-sm btn-dark" href="{{ url_for('logout') }}">Logout</a>
     </div>
   </div>
 </nav>
@@ -103,7 +101,7 @@ def index():
     return render_template_string(BASE, body=body)
 
 LOGIN_FORM = """
-<div class="card p-4">
+<div class="card p-4 themed-card">
   <h5 class="mb-3">Unlock Vault</h5>
   <form method="post">
     <div class="mb-3">
@@ -148,8 +146,8 @@ VAULT_LIST = """
   </form>
   <a class="btn btn-primary" href="{{ url_for('add') }}">+ Add Entry</a>
 </div>
-<div class="card p-0">
-<table class="table table-dark table-striped mb-0">
+<div class="card p-0 themed-card">
+<table class="table table-striped mb-0">
   <thead><tr><th>Site</th><th>Username</th><th>Tags</th><th>Actions</th></tr></thead>
   <tbody>
   {% for e in entries %}
@@ -196,7 +194,7 @@ def add():
     return render_template_string(BASE, body=body)
 
 FORM_ADD = """
-<div class="card p-4">
+<div class="card p-4 themed-card">
   <h5 class="mb-3">Add Entry</h5>
   <form method="post">
     <div class="row g-3">
@@ -240,7 +238,7 @@ def show(entry_id):
     return render_template_string(BASE, body=body)
 
 VIEW_ENTRY = """
-<div class="card p-4">
+<div class="card p-4 themed-card">
   <h5 class="mb-3">{{ e['site'] }} — {{ e['username'] }}</h5>
   <div class="mb-2"><strong>Password:</strong> <code>{{ e['password'] }}</code></div>
   <div class="mb-2"><strong>URL:</strong> {{ e.get('url') or '-' }}</div>
@@ -275,7 +273,7 @@ def edit(entry_id):
     return render_template_string(BASE, body=body)
 
 FORM_EDIT = """
-<div class="card p-4">
+<div class="card p-4 themed-card">
   <h5 class="mb-3">Edit Entry</h5>
   <form method="post">
     <div class="row g-3">

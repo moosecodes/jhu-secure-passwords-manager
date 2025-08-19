@@ -1,3 +1,83 @@
+:root {
+  --spm-bg-color: #f5f5e5;
+  --spm-text-color: #333;
+  --spm-primary: #5c6c5b;
+  --spm-secondary: #eeeecc; /* Updated for better contrast */
+  --spm-card-bg: #e8e8d8;
+}
+
 body, button, input {
   font-family: 'Inter', sans-serif;
+  color: var(--spm-text-color);
+  background-color: var(--spm-bg-color);
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--spm-primary) !important;
+}
+.navbar .navbar-brand {
+  color: #fff;
+}
+.navbar .btn-light, .navbar .btn-outline-light {
+  color: #fff;
+  border-color: #fff;
+}
+.navbar .btn-light:hover, .navbar .btn-outline-light:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+/* Themed card */
+.themed-card {
+  background-color: var(--spm-card-bg);
+  border: 1px solid #d4d4c4;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+/* Form and input styling */
+.form-control, .form-select, .form-check-input {
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+/* Placeholder styling */
+input::placeholder,
+textarea::placeholder {
+  color: #000!important; /* Darker placeholder text */
+  opacity: 1; /* Ensures consistency across browsers */
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--spm-primary);
+  border-color: var(--spm-primary);
+}
+.btn-primary:hover {
+  background-color: var(--spm-secondary);
+  border-color: var(--spm-secondary);
+}
+.btn-outline-light {
+  color: var(--spm-primary);
+  border-color: var(--spm-primary);
+}
+.btn-outline-light:hover {
+  background-color: var(--spm-primary);
+  color: #fff;
+}
+
+/* Table styling */
+.table {
+  --bs-table-bg: var(--spm-card-bg);
+  --bs-table-striped-bg: #dcdccf;
+  color: var(--spm-text-color);
+}
+.table thead th {
+  border-bottom-color: var(--spm-text-color);
+}
+
+/* Vault path text */
+.text-vault {
+  color: var(--spm-secondary); /* Use the new, brighter secondary color */
 }
