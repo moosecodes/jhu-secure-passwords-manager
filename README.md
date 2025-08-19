@@ -64,14 +64,14 @@ python -m password_manager.seed_vault
 ```
 Creates `data/test.vault.json` with sample entries.
 
-### 3. Run the CLI
+### 3. Run the CLI and select interface
 ```bash
 python -m password_manager.cli
 ```
 
-### 4. Run the Web Interface (optional)
+### 4. or just Run the Web Interface (optional)
 ```bash
-flask --app password_manager.webapp run
+python -m password_manager.webapp
 ```
 Then open [http://127.0.0.1:5050](http://127.0.0.1:5050).
 

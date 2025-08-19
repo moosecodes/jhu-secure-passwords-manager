@@ -321,3 +321,6 @@ def delete(entry_id):
     ok = svc.delete_entry(entry_id)
     flash("Deleted." if ok else "Not found.")
     return redirect(url_for("vault"))
+
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)
