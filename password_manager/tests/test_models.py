@@ -1,6 +1,4 @@
 """Tests for password_manager.models module."""
-
-import pytest
 from datetime import datetime, timezone
 from uuid import UUID
 
@@ -12,7 +10,6 @@ from password_manager.models import (
     Vault,
     now_iso
 )
-
 
 class TestPasswordPolicy:
     """Test PasswordPolicy dataclass."""

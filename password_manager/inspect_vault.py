@@ -1,8 +1,10 @@
+'''inspect vault'''
 from pathlib import Path
-import json, argparse, getpass
+import argparse
+import getpass
 from cryptography.exceptions import InvalidTag
-from storage import load_vault
-from password_manager.crypto import decrypt_vault
+from .storage import load_vault
+from .crypto import decrypt_vault
 
 def main():
     ap = argparse.ArgumentParser()
