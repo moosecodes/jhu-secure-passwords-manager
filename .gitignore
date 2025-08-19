@@ -1,7 +1,7 @@
-
 # Byte-compiled / optimized / DLL files
-__pycache__/
 *.py[cod]
+*.pyc
+
 *$py.class
 .pytest_cache
 
@@ -51,10 +51,15 @@ instance/
 *.db
 *.sqlite3
 
+# Personal/Production Vaults (keep test vault in git)
+data/*personal*.vault.json
+data/*production*.vault.json
+data/*.backup
+
 # Logs
 *.log
-logs/
-intel/logs/
+
+intel/
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
@@ -71,13 +76,7 @@ intel/logs/
 .LSOverride
 
 # Ignore vault files
-data/
 *.vault.json
 
 # Other
 __MACOSX/
-.env
-__pycache__/
-*.pyc
-logs/
-data/*.vault.json
