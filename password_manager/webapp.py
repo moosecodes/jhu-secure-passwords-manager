@@ -1,8 +1,9 @@
+'''webapp.py'''
 from __future__ import annotations
-import os, secrets
-import traceback
-from cryptography.exceptions import InvalidTag
+import os
+import secrets
 from pathlib import Path
+from cryptography.exceptions import InvalidTag
 from flask import Flask, request, redirect, url_for, session, render_template_string, flash
 from .vault_service import VaultService
 
@@ -30,19 +31,28 @@ def get_svc() -> VaultService:
 
 BASE = """
 <!doctype html>
-<html lang="en"><head>
+<html lang="en" data-bs-theme="light">
+<head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<title>Secure Password Manager</title>
+<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/darkly/bootstrap.min.css" rel="stylesheet">
 <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
-<style> body{background:#0f172a;color:#e2e8f0} .card{background:#111827;border:1px solid #374151} .form-control,.form-select{background:#0b1220;color:#e2e8f0;border-color:#374151} .btn-primary{background:#2563eb;border-color:#2563eb} .btn-outline-light{border-color:#64748b;color:#e2e8f0} a{color:#93c5fd} </style>
-</head><body>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}?v=3">
+
+<!-- Google Fonts: Inter + Figtree -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<title>Secure Password Manager</title>
+</head>
+<body>
 <nav class="navbar navbar-dark" style="background:#0b1220">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ url_for('vault') }}">🔐 Password Manager</a>
     <div>
       {% if session.get('vault_file') %}<span class="me-3 small text-secondary">{{ session.get('vault_file') }}</span>{% endif %}
-      <a class="btn btn-sm btn-outline-light" href="{{ url_for('logout') }}">Logout</a>
+      <a class="btn btn-sm btn-light" href="{{ url_for('logout') }}">Logout</a>
     </div>
   </div>
 </nav>
