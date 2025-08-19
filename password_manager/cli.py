@@ -22,14 +22,7 @@ def choose_mode() -> str:
     print("Welcome to Secure Password Manager")
     print("1) Continue in CLI")
     print("2) Switch to Web interface")
-    choice = input("Select: ").strip()
-    if choice == "2":
-        print("Starting web interface. Your browser will open shortly.")
-        subprocess.Popen(['flask', '--app', 'password_manager.webapp', 'run'])
-        time.sleep(2)
-        webbrowser.open_new_tab('http://127.0.0.1:5000')
-        sys.exit(0)
-    return "cli"
+    return input("Select: ").strip()
 
 def list_entries(svc: VaultService):
     es = svc.list_entries()
@@ -133,7 +126,23 @@ def menu_loop(svc: VaultService):
             print("Error:", e)
 
 def main():
-    choose_mode()
+    mode = choose_mode()
+
+    if mode == "2":
+        print("Starting web interface at http://127.0.0.1:5050")
+        from .webapp import app
+
+        # open browser
+        try:
+            webbrowser.open_new_tab("http://127.0.0.1:5050")
+        except Exception:
+            pass
+
+        # Run Flask in foreground, disable reloader to avoid double-run
+        app.run(debug=False, use_reloader=False, host="127.0.0.1", port=5050)
+        return  # exit after Flask stops
+
+    # otherwise, CLI mode
     ap = argparse.ArgumentParser()
     ap.add_argument("--file", default=str(VAULT_PATH))
     ap.add_argument("--master")
