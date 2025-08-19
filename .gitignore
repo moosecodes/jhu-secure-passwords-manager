@@ -3,6 +3,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.pytest_cache
 
 # C extensions
 *.so
@@ -30,7 +31,7 @@ MANIFEST
 # Virtual environments
 venv/
 .env
-.env*/ 
+.env*/
 .venv/
 pip-wheel-metadata/
 
@@ -68,6 +69,10 @@ intel/logs/
 .DS_Store
 .AppleDouble
 .LSOverride
+
+# Ignore vault files
+data/
+*.vault.json
 
 # Other
 __MACOSX/
