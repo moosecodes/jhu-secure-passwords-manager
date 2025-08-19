@@ -10,6 +10,7 @@ from logging.handlers import RotatingFileHandler
 from .storage import save_vault, load_vault
 from .crypto import encrypt_vault, decrypt_vault
 from .passwords import generate_password
+from .seed_vault import build_seed_vault
 
 def now_iso(): return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
 
@@ -110,3 +111,9 @@ class VaultService:
                 self.save()
                 return True
         return False
+
+    def reset_to_defaults(self) -> None:
+        """Reset vault to default test data."""
+        self._vault = build_seed_vault().to_dict()
+        self.save()
+        self.logger.info("vault_reset_to_defaults")

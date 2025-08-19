@@ -111,6 +111,7 @@ def menu_loop(svc: VaultService):
         "5": ("Rotate password", lambda: (lambda e=pick_entry(svc): e and (svc.rotate_password(e['id']) or print('Rotated.')))()),
         "6": ("Delete entry", lambda: delete_entry(svc)),
         "7": ("Search", lambda: search_entries(svc)),
+        "8": ("Reset to defaults", lambda: svc.reset_to_defaults()),
         "0": ("Exit", None),
     }
     while True:
