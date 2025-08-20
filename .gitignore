@@ -33,7 +33,7 @@ MANIFEST
 venv/
 .venv/
 pip-wheel-metadata/
-hi my name is mustafa nd shu239982
+
 # Environment variables / secrets
 *.env
 .envrc
@@ -82,3 +82,6 @@ intel/
 # Other
 __MACOSX/
 logs/
+
+.coverage
+htmlcov/

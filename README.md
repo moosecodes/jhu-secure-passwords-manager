@@ -84,6 +84,11 @@ Run the full test suite:
 pytest password_manager/tests -v
 ```
 
+## Code Coverage
+```bash
+pytest --cov=password_manager --cov-report=html
+```
+
 ---
 
 ## 🔒 Security Highlights
