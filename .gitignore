@@ -47,6 +47,9 @@ SPM_SECRET
 *.yml
 *.yaml
 
+# Keep the environment spec in git
+!environment.yml
+
 # Flask specific
 instance/
 *.db
